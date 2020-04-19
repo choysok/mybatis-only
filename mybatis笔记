@@ -1,0 +1,32 @@
+持久层技术解决方案
+     JDBC技术：
+	         Connection
+			 PrepareStatement
+			 ResultSet
+	Spring中的jdbcTemplate  对jdbc的简单封装
+	
+ORM   Object Relational Mapping
+
+mybatis的环境构建
+  第一步  创建maven工程并导入坐标
+  第二步  创建实体类和dao的接口
+  第三部  创建mybatis的主配置文件
+  第四步  创建映射配置文件
+  注意事项：1.创建UserDao.xml和UserDao.java时名称是为了和我们之前的知识保持一致，
+                在mybatis中它把持久层的操作接口名称和映射文件也叫做Mapper
+	               所以 UserDao 和 UserMapper是一样的
+		    2.在idea中创建目录的时候，它和包是不一样的，包在创建时：com.mybatis.dao它是三级结构
+			  目录在创建时：com.mybatis.dao是一级目录
+			3.mybatis的映射配置文件位置必须和dao接口的包结构相同
+			4.映射配置文件的mapper标签namespace属性的取值必须是dao接口的全限定类名
+			5.映射配置文件的操作配置（比如：<select>），id属性的取值必须是dao接口的方法名
+			6.配置映射配置文件的操作配置中的resultType属性的取值是实体类的全限定类名
+			当我们遵从了第三、四、五、六点之后、我们在开发中就无须再写dao的实现类
+			
+mybatis的代码逻辑  
+      1.使用Resources读取配置文件
+	  2.从SqlSessionFactoryBuild构建器中创建SqlSessionFactory工厂
+	  3.使用工厂生产SqlSession
+	  4.使用SqlSession创建Dao接口的代理对象
+	  5.使用代理对象执行方法
+	  6.释放资源
